@@ -28,7 +28,7 @@ context( 'Responsiveness', () => {
   } );
   viewportPresets.forEach( ( el ) => {
     if ( !el.aliases )el.aliases = '';
-    el.mode = el.noLandscape ? '' : '- portrait';
+    el.mode = el.noLandscape ? '' : `- portrait - ${el.width}x${el.height}`;
     context( `${el.name} ${el.aliases} ${el.mode}`, () => {
       before( () => {
         cy.viewport( el.name );
@@ -39,7 +39,7 @@ context( 'Responsiveness', () => {
     } );
 
     if ( !el.noLandscape ) {
-      context( `${el.name} ${el.aliases} -landscape`, () => {
+      context( `${el.name} ${el.aliases} - landscape - ${el.height}x${el.width}`, () => {
         before( () => {
           // cy.visit( Cypress.config( 'defaultPage' ) );
           cy.viewport( el.name, 'landscape' );
