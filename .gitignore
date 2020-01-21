@@ -10,6 +10,8 @@
 testComponent.tsx
 testQueries.tsx
 
+/*examples
+
 # production
 /build
 
@@ -29,5 +31,6 @@ yarn-error.log*
 
 # cypress screenshots
 
-*screenshots
-
+**/screenshots
+**/videos
+**/examples
