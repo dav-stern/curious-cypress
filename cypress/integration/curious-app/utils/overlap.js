@@ -15,21 +15,39 @@ const getRect = ( selector ) => {
   }
 };
 
-const overlap = ( r1, r2 ) => {
-  if ( !r1 || !r2 ) return false;
+const overlap = ( r, rc ) => {
+  if ( !r || !rc ) return false;
 
-  return !( r2.left > r1.right || 
-      r2.right < r1.left || 
-      r2.top > r1.bottom ||
-      r2.bottom < r1.top );
+  return !( rc.left > r.right || 
+      rc.right < r.left || 
+      rc.top > r.bottom ||
+      rc.bottom < r.top );
   
 };
 
 Cypress.Commands.add( 'overlap', { prevSubject: true }, ( el, el2, expected ) => {
-  return getRect( el ).then( r2 => {
-    getRect( el2 ).then( r1 => {
-      console.log( 'r1',r1,'r2',r2 );
-      expect( overlap( r1, r2 ) ).to.equal( expected );
+  return getRect( el ).then( rc => {
+    getRect( el2 ).then( r => {
+      expect( overlap( r, rc ) ).to.equal( expected );
+    } );
+  } );
+} );
+
+const isInside = ( r, rc ) => {
+  if ( !r || !rc ) return false;
+  return (
+    rc.top >= r.top &&
+      rc.bottom <= r.bottom &&
+      rc.left >= r.left &&
+      rc.right <= r.right
+  );
+};
+
+Cypress.Commands.add( 'isInside', { prevSubject: true }, ( el, el2, expected ) => {
+  return getRect( el ).then( rc => {
+    getRect( el2 ).then( r => {
+      console.log( 'r',r,'rc',rc );
+      expect( isInside( r, rc ) ).to.equal( expected );
     } );
   } );
 } );

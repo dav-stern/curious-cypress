@@ -38,9 +38,14 @@ context( 'Responsiveness', () => {
       } );
 
       it( 'logo should be entirely visible', () => {
-        cy.get( 'h1' ).overlap( 'viewport', true );
+        cy.get( 'h1' ).isInside( 'viewport', true );
         
       } );
+      it( 'form should be entirely visible', () => {
+        cy.get( '.form-wrapper' ).isInside( 'viewport', true );
+        
+      } );
+
       it( 'logo and auth form should not overlap', () => {
         cy.get( 'h1' ).overlap( '.form-wrapper', false );
         
