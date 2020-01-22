@@ -19,6 +19,7 @@ for( let i=0;i<10;i++ ) {
   };
   context( `${user.name}'s interactions`,  () => {
     before( () => {
+      cy.viewport( 'macbook-15' );
       cy.visit( Cypress.config( 'defaultPage' ) );
     } );
     after( () => {
@@ -83,9 +84,17 @@ for( let i=0;i<10;i++ ) {
           .click();  
 
         // Add topic
-        for( let i=0;i<randTill( 5 );i++ ) {
-          cy.get( '.add-topic-btn' )
+        for( let i=0;i<randTill( 3 );i++ ) {
+          cy
+            .get( '.add-topic-btn' )
             .click( {force: true} ); // it's not visible
+
+          // Just to select the topic. next one sometimes fails
+          // WHY ?
+          // Maybe because it's appearing with an effect...
+          cy.get( '.topics-container :first-child' )
+            .first()
+            .click( {force:true} ); // The force is mandatory
 
           cy.get( '.topic-title' )
             .type( faker.hacker.phrase() );
