@@ -1,3 +1,4 @@
 {
-  "defaultPage": "http://localhost:3001/"
+  "defaultPage": "http://localhost:3001/",
+  "integrationFolder":"curious-integration"
 }
