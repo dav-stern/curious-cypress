@@ -7,7 +7,7 @@ const cyValidateTextField = ( obj ) => {
     cy.get( obj.selector ).should( 'be.visible' );
   } );
 
-  it( `${obj.title} field should be of type text`, () => {
+  it( `${obj.title} field should be of type ${obj.type}`, () => {
     cy.get( obj.selector ).should( 'have.attr', 'type', obj.type );
   } );
   
